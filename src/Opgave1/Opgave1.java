@@ -6,14 +6,14 @@ import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
 public class Opgave1 extends Application{
-    static TextArea text = new javafx.scene.control.TextArea();
+    static TextArea text = new TextArea();
     @Override
     public void start(Stage stage) throws Exception {
         text.setWrapText(true);
 //        // Create task
-//        Runnable printA = new PrintChar('a', 100);
-//        Runnable printB = new PrintChar('b', 100);
-//        Runnable print100 = new PrintNum(100);
+//        Runnable printA = new PrintChar('a', 10);
+//        Runnable printB = new PrintChar('b', 10);
+//        Runnable print100 = new PrintNum(10);
 //
 //        // Create threads
 //        Thread thread1 = new Thread(printA);
@@ -21,12 +21,15 @@ public class Opgave1 extends Application{
 //        Thread thread3 = new Thread(print100);
 //
 //        // Start threads
-//        thread1.run();
-//        thread2.run();
-//        thread3.run();
-        Thread printA = new Thread(new PrintChar('a', 20));
-        Thread printB = new Thread(new PrintChar('b', 20));
-        Thread printNumber = new Thread(new PrintNum(20));
+//        thread1.start();
+//        thread2.start();
+//        thread3.start();
+
+        // den vejledende løsning, den kan skrive flere tal før den laver out of bounds exception
+        //men det er næsten umuligt at lave en lang tekst uden fejl
+        Thread printA = new Thread(new PrintChar('a', 10));
+        Thread printB = new Thread(new PrintChar('b', 10));
+        Thread printNumber = new Thread(new PrintNum(10));
 
         printA.start();
         printB.start();
@@ -63,7 +66,7 @@ class PrintChar implements Runnable {
      */
     public void run() {
         for (int i = 0; i < times; i++) {
-            Opgave1.text.appendText(String.valueOf(charToPrint + " "));
+            Opgave1.text.appendText(String.valueOf(charToPrint + ""));
         }
     }
 }
@@ -80,7 +83,7 @@ class PrintNum implements Runnable {
     @Override /** Tell the thread how to run */
     public void run() {
         for (int i = 1; i <= lastNum; i++) {
-            Opgave1.text.appendText(String.valueOf(" " + i));
+            Opgave1.text.appendText(String.valueOf(i + ""));
         }
     }
 }
